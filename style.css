@@ -1,0 +1,330 @@
+/* ===============================
+   RESET & VARIABLES
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+    --purple-100: hsl(254, 88%, 90%);
+    /* Light Purple */
+    --purple-500: hsl(256, 67%, 59%);
+    /* Main Purple */
+    --yellow-100: hsl(31, 66%, 93%);
+    /* Light Yellow/Peach */
+    --yellow-500: hsl(39, 100%, 71%);
+    /* Yellow */
+    --white: hsl(0, 0%, 100%);
+    --black: hsl(0, 0%, 7%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===============================
+   BODY
+================================ */
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--black);
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* ===============================
+   BENTO GRID LAYOUT
+================================ */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto;
+    /* Define row heights explicitly if needed, or let content drive it */
+    gap: 30px;
+    /* Increased gap */
+    max-width: 1100px;
+    width: 100%;
+
+    /* Define the grid areas */
+    /* 
+       Grid Design: 4 cols
+       Row 1: Create(1), Social(2-3), Schedule(4)
+       Row 2: Create(1), Social(2-3), Schedule(4)
+       Row 3: Write(1), Manage(2), Maintain(3), Schedule(4)
+       Row 4: Write(1), Audience(2), Followers(3-4) ? No, let's look at image.
+       
+       Wait, let's map carefully based on image:
+       Col 1: Create Post (Tall - 2 rows), Write Content (Tall - 2 rows)
+       Col 2 & 3 (Top): Social Media 10x (Wide - 2 rows? Or 1 very tall?) -> It looks like 2 units tall?
+       Col 2 (Middle): Manage multiple accounts (Square?)
+       Col 3 (Middle): Maintain posting schedule (Square?)
+       Col 2 (Bottom): >56% audience
+       Col 3 & 4 (Bottom - merged?): Grow followers ... No, Grow followers is wide at bottom right?
+       Col 4 (Top): Schedule to social media (Very Tall - 3 rows?)
+       
+       Revised Grid Map (4 columns x ~4 rows?):
+       
+       [ Create ] [ Social  ] [ Social  ] [ Schedule ]
+       [ Create ] [ Social  ] [ Social  ] [ Schedule ]
+       [ Write  ] [ Manage  ] [ Maintain] [ Schedule ]
+       [ Write  ] [ Grow    ] [ Follow  ] [ Follow   ] ???
+       
+       Actually, let's check the previous HTML logic which had spans.
+       Card 1 (Create quick): span-v-2 (Tall)
+       Card 2 (Social 10x): span-h-2 (Wide)
+       Card 3 (Schedule): span-v-3 (Very Tall)
+       Card 4 (Manage): 1x1
+       Card 5 (Maintain): 1x1
+       Card 6 (Write AI): span-v-2 (Tall)
+       Card 7 (Audience >56%): 1x1
+       Card 8 (Grow Followers): span-h-2 (Wide)
+
+       Let's arrange:
+       C1 C2 C2 C3
+       C1 C2 C2 C3
+       C6 C4 C5 C3
+       C6 C7 C8 C8
+       
+       Areas:
+       "create social social schedule"
+       "create social social schedule"
+       "write  manage maintain schedule"
+       "write  audience followers followers"
+       
+       This looks correct based on standard bento grids.
+    */
+    grid-template-areas:
+        "create social social schedule"
+        "create social social schedule"
+        "write  manage maintain schedule"
+        "write  audience followers followers";
+}
+
+/* ===============================
+   AREA ASSIGNMENTS
+================================ */
+.area-create {
+    grid-area: create;
+}
+
+.area-social {
+    grid-area: social;
+}
+
+.area-schedule {
+    grid-area: schedule;
+}
+
+.area-manage {
+    grid-area: manage;
+}
+
+.area-maintain {
+    grid-area: maintain;
+}
+
+.area-write {
+    grid-area: write;
+}
+
+.area-audience {
+    grid-area: audience;
+}
+
+.area-followers {
+    grid-area: followers;
+}
+
+/* ===============================
+   CARD STYLES
+================================ */
+.card {
+    border-radius: 16px;
+    /* Smooth radius */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Default specific spacing */
+    overflow: hidden;
+    /* Keep images inside */
+    position: relative;
+    box-shadow: none;
+    /* Flat design */
+}
+
+/* Colors */
+.bg-purple-500 {
+    background-color: var(--purple-500);
+    color: white;
+}
+
+.bg-purple-100 {
+    background-color: var(--purple-100);
+    color: var(--black);
+}
+
+.bg-yellow-500 {
+    background-color: var(--yellow-500);
+    color: var(--black);
+}
+
+.bg-yellow-100 {
+    background-color: var(--yellow-100);
+    color: var(--black);
+}
+
+.bg-white {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* Specific Card Tweaks */
+
+/* Area: Social (Hero) */
+.area-social {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.area-social .stars {
+    color: var(--yellow-500);
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+}
+
+/* Area: Create */
+.area-create {
+    justify-content: center;
+    background-color: var(--yellow-100);
+}
+
+.area-create h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.area-create .card-btn {
+    color: var(--purple-500);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Area: Schedule */
+.area-schedule {
+    background-color: var(--purple-100);
+    overflow: hidden;
+    /* For the graph cut-off */
+}
+
+.area-schedule .card-content {
+    margin-bottom: 20px;
+}
+
+.area-schedule img {
+    width: 140%;
+    /* Overflowing image */
+    max-width: none;
+    margin-left: -20%;
+}
+
+/* Area: Maintain */
+.area-maintain {
+    background-color: var(--yellow-500);
+}
+
+/* Area: Write AI */
+.area-write {
+    background-color: var(--yellow-500);
+}
+
+/* Area: Followers */
+.area-followers {
+    background-color: var(--purple-500);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.area-followers img {
+    max-width: 180px;
+}
+
+.area-followers .content {
+    color: white;
+}
+
+.area-followers h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+/* ===============================
+   TYPOGRAPHY
+================================ */
+h1 {
+    font-size: 3.5rem;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+h1 span {
+    color: var(--yellow-500);
+    font-style: italic;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+p {
+    font-size: 18px;
+    /* Per style guide */
+    line-height: 1.4;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "social"
+            "create"
+            "schedule"
+            "manage"
+            "maintain"
+            "write"
+            "audience"
+            "followers";
+    }
+
+    body {
+        padding: 30px 15px;
+    }
+}
