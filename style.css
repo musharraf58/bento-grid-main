@@ -140,6 +140,61 @@ body {
 }
 
 /* ===============================
+   ADDITIONAL CARD STYLES
+   (Migrated from inline)
+================================ */
+
+/* Area: Manage */
+.img-platforms {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.manage-content {
+    margin-top: 10px;
+}
+
+/* Area: Maintain */
+.maintain-media {
+    margin-top: 10px;
+    overflow: hidden;
+    height: 100px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.img-maintain {
+    width: 70%;
+}
+
+/* Area: Write */
+.write-media {
+    margin-top: 20px;
+}
+
+.img-write {
+    width: 90%;
+}
+
+/* Area: Audience */
+.audience-growth-stat {
+    font-size: 3rem;
+}
+
+.audience-growth-label {
+    font-size: 1rem;
+}
+
+.audience-media {
+    margin-top: 10px;
+}
+
+.img-audience {
+    width: 70%;
+}
+
+/* ===============================
    CARD STYLES
 ================================ */
 .card {
@@ -198,6 +253,11 @@ body {
     font-size: 1.5rem;
 }
 
+.social-reviews-text {
+    color: var(--white);
+    opacity: 0.9;
+}
+
 /* Area: Create */
 .area-create {
     justify-content: center;
@@ -213,7 +273,35 @@ body {
 .area-create .card-btn {
     color: var(--purple-500);
     font-weight: bold;
+    color: var(--purple-500);
+    font-weight: bold;
     font-size: 1.2rem;
+}
+
+.text-highlight-purple {
+    color: var(--purple-500);
+    font-style: italic;
+}
+
+.badge-create {
+    background: var(--yellow-500);
+    padding: 12px 24px;
+    border-radius: 30px;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.badge-icon {
+    margin-left: 5px;
+}
+
+.create-post-media {
+    margin-top: 20px;
+}
+
+.img-create {
+    width: 80%;
+    margin: 0 auto;
 }
 
 /* Area: Schedule */
@@ -232,6 +320,11 @@ body {
     /* Overflowing image */
     max-width: none;
     margin-left: -20%;
+}
+
+.schedule-text {
+    margin-top: 20px;
+    font-size: 1rem;
 }
 
 /* Area: Maintain */
@@ -255,6 +348,16 @@ body {
 
 .area-followers img {
     max-width: 180px;
+}
+
+.followers-content {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.followers-title {
+    color: white;
+    margin-bottom: 20px;
 }
 
 .area-followers .content {
